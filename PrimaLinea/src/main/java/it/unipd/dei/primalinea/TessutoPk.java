@@ -26,22 +26,33 @@ public class TessutoPk implements Serializable {
 	public void setVarianteColore(String varianteColore) {
 		this.varianteColore = varianteColore;
 	}
-	
+
 	@Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TessutoPk other = (TessutoPk) obj;
-        if ((this.codice == 0) ? (other.codice != 0) : this.codice != other.codice) {
-            return false;
-        }
-        if ((this.varianteColore == null) ? (other.varianteColore != null) : !this.varianteColore.equals(other.varianteColore)) {
-            return false;
-        }
-        return true;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + codice;
+		result = prime * result + ((varianteColore == null) ? 0 : varianteColore.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TessutoPk other = (TessutoPk) obj;
+		if (codice != other.codice)
+			return false;
+		if (varianteColore == null) {
+			if (other.varianteColore != null)
+				return false;
+		} else if (!varianteColore.equals(other.varianteColore))
+			return false;
+		return true;
+	}
+	
 }

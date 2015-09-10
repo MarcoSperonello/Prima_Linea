@@ -32,4 +32,35 @@ public class ConsegnaPk implements Serializable {
 		this.articolo = articolo;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((articolo == null) ? 0 : articolo.hashCode());
+		result = prime * result + ((dataConsegna == null) ? 0 : dataConsegna.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConsegnaPk other = (ConsegnaPk) obj;
+		if (articolo == null) {
+			if (other.articolo != null)
+				return false;
+		} else if (!articolo.equals(other.articolo))
+			return false;
+		if (dataConsegna == null) {
+			if (other.dataConsegna != null)
+				return false;
+		} else if (!dataConsegna.equals(other.dataConsegna))
+			return false;
+		return true;
+	}
+
 }
