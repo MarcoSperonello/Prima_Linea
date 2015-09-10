@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="it.unipd.dei.primalinea">
+	<class name="Filato" table="FILATO">
+		<composite-id name="filatoKey" class="FilatoPk">
+			<key-property name="titolo" column="titolo" type="int" />
+			<key-property name="codiceColore" column="codice_colore"
+				type="int" />
+			<key-property name="fornitore" column="fornitore" type="string"
+				length="32" />
+		</composite-id>
+		<property name="costo" type="big_decimal">
+			<column name="costo" precision="4" scale="2" check="(costo>=0)" />
+		</property>
+		<set name="materiali" table="COSTITUITO_DA_FILATO" cascade="all"
+			inverse="false">
+			<key>
+				<column name="titolo_filato" />
+				<column name="colore_filato" />
+				<column name="fornitore_filato" length="32" />
+			</key>
+			<many-to-many class="Materiale" column="materiale" />
+		</set>
+	</class>
+</hibernate-mapping>

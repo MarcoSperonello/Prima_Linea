@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- <property name="connection.url"> jdbc:mysql://localhost:3306/prima_linea 
+			</property> <property name="connection.driver_class"> com.mysql.jdbc.Driver 
+			</property> -->
+		<property name="connection.url">
+			jdbc:postgresql://localhost:5432/prima_linea
+		</property>
+		<property name="connection.driver_class">
+			org.postgresql.Driver
+		</property>
+		<property name="connection.username">
+			postgres
+		</property>
+		<!-- <property name="connection.password"> password </property> -->
+		<!-- <property name="dialect">
+			org.hibernate.dialect.MySQL5Dialect
+		</property> -->
+		<property name="dialect">
+		    org.hibernate.dialect.PostgreSQLDialect
+		</property>
+		<property name="hibernate.jdbc.batch_size">0</property>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="current_session_context_class">thread</property>
+		<property name="hibernate.enable_lazy_load_no_trans">true</property>
+		<mapping resource="Cliente.hbm.xml" />
+		<mapping resource="Ordine.hbm.xml" />
+		<mapping resource="Modello.hbm.xml" />
+		<mapping resource="Tessuto.hbm.xml" />
+		<mapping resource="Filato.hbm.xml" />
+		<mapping resource="Materiale.hbm.xml" />
+		<mapping resource="Articolo.hbm.xml" />
+		<mapping resource="Consegna.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="it.unipd.dei.primalinea">
+	<class name="Tessuto" table="TESSUTO">
+		<composite-id name="tessutoKey" class="TessutoPk">
+			<key-property name="codice" column="codice" type="int" />
+			<key-property name="varianteColore" column="variante_colore"
+				type="string" length="32" />
+		</composite-id>
+		<set name="clienti" table="FORNISCE_TESSUTO" cascade="all"
+			inverse="false">
+			<key>
+				<column name="codice_tessuto" />
+				<column name="colore_tessuto" length="32"/>
+			</key>
+			<many-to-many class="Cliente">
+				<column name="cliente" precision="15" scale="0" />
+			</many-to-many>
+		</set>
+		<set name="materiali" table="COSTITUITO_DA_TESSUTO" cascade="all"
+			inverse="false">
+			<key>
+				<column name="codice_tessuto" />
+				<column name="colore_tessuto" length="32" />
+			</key>
+			<many-to-many class="Materiale" column="materiale" />
+		</set>
+	</class>
+</hibernate-mapping>

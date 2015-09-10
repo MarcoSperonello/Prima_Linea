@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="it.unipd.dei.primalinea">
+	<class name="Cliente" table="CLIENTE">
+		<id name="partitaIva" type="big_decimal">
+			<column name="partita_iva" precision="15" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="email" column="email" type="string" length="32" />
+		<property name="nome" column="nome" type="string" length="32" not-null="true" />
+		<property name="telefono" column="telefono" type="string" length="30" />
+		<property name="indirizzo" column="indirizzo" type="string" length="64" not-null="true" />
+		<set name="ordini" table="ORDINE" cascade="save-update">
+			<key column="cliente" />
+			<one-to-many class="Ordine" />
+		</set>
+		<set name="modelli" table="MODELLO" cascade="save-update">
+			<key column="cliente" />
+			<one-to-many class="Modello" />
+		</set>
+		<set name="tessuti" table="FORNISCE_TESSUTO" cascade="all"
+			inverse="true">
+			<key>
+				<column name="cliente" precision="15" scale="0" />
+			</key>
+			<many-to-many class="Tessuto">
+				<column name="codice_tessuto" />
+				<column name="colore_tessuto" length="32"/>
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
